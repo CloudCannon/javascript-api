@@ -1,0 +1,45 @@
+{
+	"name": "@cloudcannon/javascript-api",
+	"version": "0.0.0",
+	"type": "module",
+	"description": "Contains TypeScript declarations for the CloudCannon JavaScript API.",
+	"author": "CloudCannon <support@cloudcannon.com>",
+	"license": "MIT",
+	"keywords": [
+		"static site generator",
+		"cloudcannon"
+	],
+	"homepage": "https://github.com/CloudCannon/javascript-api#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CloudCannon/javascript-api.git"
+	},
+	"bugs": {
+		"url": "https://github.com/CloudCannon/javascript-api/issues",
+		"email": "support@cloudcannon.com"
+	},
+	"scripts": {
+		"lint": "npm run lint:tsc && npm run lint:format",
+		"lint:tsc": "tsc --noEmit",
+		"lint:format": "biome check --fix",
+		"lint:report": "biome lint --diagnostic-level=error --reporter=junit > lint-results.xml",
+		"lint:staged": "biome check --diagnostic-level=error --staged --no-errors-on-unmatched",
+		"build": "exit 0",
+		"test": "exit 0"
+	},
+	"main": "./src/index.d.ts",
+	"types": "./src/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"src/**/*"
+	],
+	"dependencies": {
+		"@cloudcannon/configuration-types": "0.0.38"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"typescript": "^5.9.2"
+	}
+}
