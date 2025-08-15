@@ -1,14 +1,10 @@
 {
 	"compilerOptions": {
 		"strict": true,
-		"allowImportingTsExtensions": true,
-		"noEmit": true
+		"esModuleInterop": true,
+		"noEmit": true,
+		"lib": ["es2020", "DOM"]
 	},
-	"include": [
-		"src/**/*.ts"
-	],
-	"exclude": [
-		"node_modules",
-		"dist"
-	]
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
 }
