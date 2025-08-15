@@ -547,7 +547,7 @@ export interface CloudCannonJavaScriptV1API {
 	 */
 	upload(
 		file: File,
-		inputConfig: RichTextInput | ImageInput | FileInput | undefined
+		inputConfig: RichTextInput | UrlInput | FileInput | undefined
 	): Promise<string | undefined>;
 
 	file(path: string): CloudCannonJavaScriptV1APIFile;
