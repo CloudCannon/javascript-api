@@ -1,9 +1,9 @@
 import type {
-	SnippetConfig,
+	Cascade,
 	FileInput,
 	RichTextInput,
+	SnippetConfig,
 	UrlInput,
-	Cascade
 } from '@cloudcannon/configuration-types';
 
 export interface CloseCustomDataPanelOptions {
