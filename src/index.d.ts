@@ -557,3 +557,14 @@ export interface CloudCannonJavaScriptV1API {
 	addEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
 	removeEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
 }
+
+export type CloudCannonJavaScriptAPIVersions = 'v0' | 'v1';
+
+export interface CloudCannonEditorWindow extends Window {
+	CloudCannonAPI?: CloudCannonJavascriptApiRouter;
+	CloudCannon?: CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
+}
+
+export interface CloudCannonJavascriptApiRouter {
+	useVersion(key: CloudCannonJavaScriptAPIVersions, preventGlobalInstall?: boolean): CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
+}
