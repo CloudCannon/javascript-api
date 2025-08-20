@@ -24,7 +24,8 @@
 		"lint:format": "biome check --fix",
 		"lint:report": "biome lint --diagnostic-level=error --reporter=junit > lint-results.xml",
 		"lint:staged": "biome check --diagnostic-level=error --staged --no-errors-on-unmatched",
-		"build": "exit 0",
+		"prebuild": "rm -rf dist && mkdir -p dist",
+		"build": "cp src/* dist/.",
 		"test": "exit 0"
 	},
 	"main": "./src/index.d.ts",
