@@ -8,7 +8,7 @@ import { useCloudCannonAPI } from './hooks/useCloudCannonAPI';
 function App() {
 	const [selectedFile, setSelectedFile] = useState<CloudCannonJavaScriptV1APIFile | null>(null);
 
-	const { api, isLoading, error, files, refreshFiles } = useCloudCannonAPI();
+	const { api, isLoading, error, files, refreshFiles, collections } = useCloudCannonAPI();
 
 	const handleFileSelect = (file: CloudCannonJavaScriptV1APIFile) => {
 		setSelectedFile(file);
@@ -69,27 +69,12 @@ function App() {
 
 	return (
 		<div className="h-screen flex flex-col bg-gray-100">
-			{/* Header */}
-			<header className="bg-white border-b border-gray-200 px-4 py-3">
-				<div className="flex items-center justify-between">
-					<h1 className="text-xl font-semibold text-gray-800">CloudCannon File Browser</h1>
-					<div className="flex items-center space-x-2 text-sm text-gray-500">
-						<span>{files.length} files</span>
-						{selectedFile && (
-							<>
-								<span>•</span>
-								<span>Editing: {selectedFile.path}</span>
-							</>
-						)}
-					</div>
-				</div>
-			</header>
-
 			{/* Main content */}
 			<div className="flex-1 flex overflow-hidden">
 				{/* File browser sidebar */}
 				<div className="w-80 flex-shrink-0">
 					<FileBrowser
+						collections={collections}
 						files={files}
 						selectedFile={selectedFile}
 						onFileSelect={handleFileSelect}
@@ -108,6 +93,7 @@ function App() {
 			{/* Status bar */}
 			<footer className="bg-blue-600 text-white px-4 py-2 text-sm">
 				<div className="flex items-center justify-between">
+					<div className="flex items-center space-x-4" />
 					<div className="flex items-center space-x-4">
 						<span>CloudCannon API v1</span>
 						{api && (
@@ -116,8 +102,6 @@ function App() {
 								Connected
 							</span>
 						)}
-					</div>
-					<div className="flex items-center space-x-4">
 						{selectedFile && (
 							<span>Language: {selectedFile.path.split('.').pop()?.toUpperCase() || 'PLAIN'}</span>
 						)}

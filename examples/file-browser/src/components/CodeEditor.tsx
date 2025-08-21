@@ -92,6 +92,11 @@ export function CodeEditor({ file, onSave }: CodeEditorProps) {
 		};
 
 		loadFileContent();
+
+		file.addEventListener('change', async () => {
+			const fileContent = await file.get();
+			setOriginalContent(fileContent);
+		});
 	}, [file]);
 
 	useEffect(() => {

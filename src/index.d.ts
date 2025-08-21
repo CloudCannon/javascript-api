@@ -480,6 +480,11 @@ export interface CloudCannonJavaScriptV1APIFile {
 
 export interface CloudCannonJavaScriptV1APICollection {
 	/**
+	 * The key of the collection
+	 */
+	collectionKey: string;
+
+	/**
 	 * Gets the items in a collection
 	 * @throws {CollectionNotFoundError} If the collection is not found
 	 * @returns Promise that resolves with the items in the collection
