@@ -2,6 +2,7 @@ import type {
 	CloudCannonApiEventDetails,
 	CloudCannonEditorWindow,
 	CloudCannonJavaScriptV1API,
+	CloudCannonJavaScriptV1APICollection,
 	CloudCannonJavaScriptV1APIFile,
 	CloudCannonJavascriptApiRouter,
 } from '@cloudcannon/javascript-api';
@@ -13,6 +14,7 @@ export interface UseCloudCannonAPIReturn {
 	isLoading: boolean;
 	error: string | null;
 	files: CloudCannonJavaScriptV1APIFile[];
+	collections: CloudCannonJavaScriptV1APICollection[];
 	refreshFiles: () => Promise<void>;
 }
 
@@ -21,6 +23,7 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const [files, setFiles] = useState<CloudCannonJavaScriptV1APIFile[]>([]);
+	const [collections, setCollections] = useState<CloudCannonJavaScriptV1APICollection[]>([]);
 	const [CloudCannonAPI, setCloudCannonApi] = useState<CloudCannonJavascriptApiRouter | undefined>(
 		undefined
 	);
@@ -88,10 +91,16 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 				const fileList = await v1API.files();
 				setFiles(fileList);
 
+				const collections = await v1API.collections();
+				setCollections(collections);
+
 				// Set up event listeners for file changes
 				const handleFileChange = async () => {
 					const fileList = await v1API.files();
 					setFiles(fileList);
+
+					const collections = await v1API.collections();
+					setCollections(collections);
 				};
 
 				v1API.addEventListener('change', handleFileChange);
@@ -129,6 +138,7 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 		isLoading,
 		error,
 		files,
+		collections,
 		refreshFiles,
 	};
 }
