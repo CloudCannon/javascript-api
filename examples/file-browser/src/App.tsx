@@ -93,7 +93,7 @@ function App() {
 			{/* Status bar */}
 			<footer className="bg-blue-600 text-white px-4 py-2 text-sm">
 				<div className="flex items-center justify-between">
-					<div className="flex items-center space-x-4"></div>
+					<div className="flex items-center space-x-4" />
 					<div className="flex items-center space-x-4">
 						<span>CloudCannon API v1</span>
 						{api && (

@@ -57,7 +57,12 @@ export function CollectionBrowser({
 				</button>
 			</div>
 
-			<FileTree files={items || []} selectedFile={selectedFile} onFileSelect={onFileSelect} isLoading={isLoading || !items} />
+			<FileTree
+				files={items || []}
+				selectedFile={selectedFile}
+				onFileSelect={onFileSelect}
+				isLoading={isLoading || !items}
+			/>
 		</div>
 	);
 }

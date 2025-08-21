@@ -72,7 +72,12 @@ export function FileBrowser({
 			</div>
 
 			{/* File tree */}
-			<FileTree files={files} selectedFile={selectedFile} onFileSelect={onFileSelect} isLoading={isLoading} />
+			<FileTree
+				files={files}
+				selectedFile={selectedFile}
+				onFileSelect={onFileSelect}
+				isLoading={isLoading}
+			/>
 		</div>
 	);
 }

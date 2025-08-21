@@ -1,6 +1,4 @@
-import type {
-	CloudCannonJavaScriptV1APIFile,
-} from '@cloudcannon/javascript-api';
+import type { CloudCannonJavaScriptV1APIFile } from '@cloudcannon/javascript-api';
 import { ChevronDown, ChevronRight, File, Folder, RefreshCw } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
@@ -137,38 +135,33 @@ function FileTreeItem({ node, selectedFile, onFileSelect, level }: FileTreeItemP
 	);
 }
 
-export function FileTree({
-	files,
-	selectedFile,
-	onFileSelect,
-	isLoading,
-}: FileTreeProps) {
+export function FileTree({ files, selectedFile, onFileSelect, isLoading }: FileTreeProps) {
 	const fileTree = useMemo(() => buildFileTree(files), [files]);
 
 	return (
-        <div className="flex-1 overflow-auto">
-            {isLoading ? (
-                <div className="p-4 text-center text-gray-500">
-                    <RefreshCw size={20} className="animate-spin mx-auto mb-2" />
-                    <p className="text-sm">Loading files...</p>
-                </div>
-            ) : fileTree.length === 0 ? (
-                <div className="p-4 text-center text-gray-500">
-                    <p className="text-sm">No files found</p>
-                </div>
-            ) : (
-                <div className="py-2">
-                    {fileTree.map((node) => (
-                        <FileTreeItem
-                            key={node.path}
-                            node={node}
-                            selectedFile={selectedFile}
-                            onFileSelect={onFileSelect}
-                            level={0}
-                        />
-                    ))}
-                </div>
-            )}
+		<div className="flex-1 overflow-auto">
+			{isLoading ? (
+				<div className="p-4 text-center text-gray-500">
+					<RefreshCw size={20} className="animate-spin mx-auto mb-2" />
+					<p className="text-sm">Loading files...</p>
+				</div>
+			) : fileTree.length === 0 ? (
+				<div className="p-4 text-center text-gray-500">
+					<p className="text-sm">No files found</p>
+				</div>
+			) : (
+				<div className="py-2">
+					{fileTree.map((node) => (
+						<FileTreeItem
+							key={node.path}
+							node={node}
+							selectedFile={selectedFile}
+							onFileSelect={onFileSelect}
+							level={0}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }
