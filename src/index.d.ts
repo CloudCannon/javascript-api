@@ -299,106 +299,105 @@ export interface CloudCannonJavaScriptV1APIFileContent {
 }
 
 export interface CloudCannonJavaScriptV1APIFileData {
-		/**
-		 * Gets the data of a file. This will be a JSON object. This is either the data from the file or the data from front matter.
-		 * @param options - Optional configuration for the value retrieval
-		 * @throws {FileNotFoundError} If the file is not found
-		 * @returns Promise that resolves with the data of the file
-		 * @example
-		 * ```javascript
-		 * const value = await CloudCannon.data({
-		 *   keepMarkdownAsHTML: true,
-		 * });
-		 * ```
-		 */
-		get(options?: ValueOptions & { slug?: string }): Promise<Record<string, any> | any[] | undefined>;
+	/**
+	 * Gets the data of a file. This will be a JSON object. This is either the data from the file or the data from front matter.
+	 * @param options - Optional configuration for the value retrieval
+	 * @throws {FileNotFoundError} If the file is not found
+	 * @returns Promise that resolves with the data of the file
+	 * @example
+	 * ```javascript
+	 * const value = await CloudCannon.data({
+	 *   keepMarkdownAsHTML: true,
+	 * });
+	 * ```
+	 */
+	get(options?: ValueOptions & { slug?: string }): Promise<Record<string, any> | any[] | undefined>;
 
-		/**
-		 * Sets data for a specific field
-		 * @param options - Configuration options for setting data
-		 * @throws {FileNotFoundError} If the file is not found
-		 * @returns Promise that resolves when the data is set
-		 * @example
-		 * ```javascript
-		 * await CloudCannon.set({
-		 *   slug: 'title',
-		 *   value: 'My Title',
-		 * });
-		 * ```
-		 */
-		set(options: SetOptions): Promise<any>;
+	/**
+	 * Sets data for a specific field
+	 * @param options - Configuration options for setting data
+	 * @throws {FileNotFoundError} If the file is not found
+	 * @returns Promise that resolves when the data is set
+	 * @example
+	 * ```javascript
+	 * await CloudCannon.set({
+	 *   slug: 'title',
+	 *   value: 'My Title',
+	 * });
+	 * ```
+	 */
+	set(options: SetOptions): Promise<any>;
 
-		/**
-		 * Initiates editing of a specific field. This will open a data panel for the field.
-		 * @param options - Configuration options for editing
-		 * @throws {FileNotFoundError} If the file is not found
-		 * @example
-		 * ```javascript
-		 * CloudCannon.edit({
-		 *   slug: 'title',
-		 *   style: 'panel',
-		 *   e: event,
-		 * });
-		 * ```
-		 */
-		edit(options: EditOptions): void;
+	/**
+	 * Initiates editing of a specific field. This will open a data panel for the field.
+	 * @param options - Configuration options for editing
+	 * @throws {FileNotFoundError} If the file is not found
+	 * @example
+	 * ```javascript
+	 * CloudCannon.edit({
+	 *   slug: 'title',
+	 *   style: 'panel',
+	 *   e: event,
+	 * });
+	 * ```
+	 */
+	edit(options: EditOptions): void;
 
-		/**
-		 * Uploads a file to an input
-		 */
-		upload(file: File, options: EditOptions): Promise<string | undefined>;
+	/**
+	 * Uploads a file to an input
+	 */
+	upload(file: File, options: EditOptions): Promise<string | undefined>;
 
-		/**
-		 * Adds an item to an array field
-		 * @param options - Configuration options for adding an array item
-		 * @throws {FileNotFoundError} If the file is not found
-		 * @returns Promise that resolves when the item is added
-		 * @example
-		 * ```javascript
-		 * await CloudCannon.addArrayItem({
-		 *   slug: 'items',
-		 *   value: { title: 'New Item' },
-		 *   e: event,
-		 * });
-		 * ```
-		 */
-		addArrayItem(options: AddArrayItemOptions): Promise<void>;
+	/**
+	 * Adds an item to an array field
+	 * @param options - Configuration options for adding an array item
+	 * @throws {FileNotFoundError} If the file is not found
+	 * @returns Promise that resolves when the item is added
+	 * @example
+	 * ```javascript
+	 * await CloudCannon.addArrayItem({
+	 *   slug: 'items',
+	 *   value: { title: 'New Item' },
+	 *   e: event,
+	 * });
+	 * ```
+	 */
+	addArrayItem(options: AddArrayItemOptions): Promise<void>;
 
-		/**
-		 * Removes an item from an array field
-		 * @param options - Configuration options for removing an array item
-		 * @throws {FileNotFoundError} If the file is not found
-		 * @returns Promise that resolves when the item is removed
-		 * @example
-		 * ```javascript
-		 * await CloudCannon.removeArrayItem({
-		 *   slug: 'items',
-		 *   index: 1,
-		 * });
-		 * ```
-		 */
-		removeArrayItem(options: RemoveArrayItemOptions): Promise<void>;
+	/**
+	 * Removes an item from an array field
+	 * @param options - Configuration options for removing an array item
+	 * @throws {FileNotFoundError} If the file is not found
+	 * @returns Promise that resolves when the item is removed
+	 * @example
+	 * ```javascript
+	 * await CloudCannon.removeArrayItem({
+	 *   slug: 'items',
+	 *   index: 1,
+	 * });
+	 * ```
+	 */
+	removeArrayItem(options: RemoveArrayItemOptions): Promise<void>;
 
-		/**
-		 * Moves an item within an array field
-		 * @param options - Configuration options for moving an array item
-		 * @throws {FileNotFoundError} If the file is not found
-		 * @returns Promise that resolves when the item is moved
-		 * @example
-		 * ```javascript
-		 * await CloudCannon.moveArrayItem({
-		 *   slug: 'items',
-		 *   index: 1,
-		 *   toIndex: 2,
-		 * });
-		 * ```
-		 */
-		moveArrayItem(options: MoveArrayItemOptions): Promise<void>;
+	/**
+	 * Moves an item within an array field
+	 * @param options - Configuration options for moving an array item
+	 * @throws {FileNotFoundError} If the file is not found
+	 * @returns Promise that resolves when the item is moved
+	 * @example
+	 * ```javascript
+	 * await CloudCannon.moveArrayItem({
+	 *   slug: 'items',
+	 *   index: 1,
+	 *   toIndex: 2,
+	 * });
+	 * ```
+	 */
+	moveArrayItem(options: MoveArrayItemOptions): Promise<void>;
 
-		addEventListener(event: 'change', callback: (event: any) => void): void;
-		removeEventListener(event: 'change', callback: (event: any) => void): void;
+	addEventListener(event: 'change', callback: (event: any) => void): void;
+	removeEventListener(event: 'change', callback: (event: any) => void): void;
 }
-
 
 export interface CloudCannonJavaScriptV1APIFile {
 	/**
@@ -557,5 +556,8 @@ export interface CloudCannonApiEventDetails {
 export interface CloudCannonEditorWindow extends Window, CloudCannonApiEventDetails {}
 
 export interface CloudCannonJavascriptApiRouter {
-	useVersion(key: CloudCannonJavaScriptAPIVersions, preventGlobalInstall?: boolean): CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
+	useVersion(
+		key: CloudCannonJavaScriptAPIVersions,
+		preventGlobalInstall?: boolean
+	): CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
 }
