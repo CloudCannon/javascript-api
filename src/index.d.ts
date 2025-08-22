@@ -19,6 +19,10 @@ export interface OpenCustomDataPanelOptions extends CloseCustomDataPanelOptions 
 	allowFullDataCascade?: boolean;
 }
 
+type EventListenerParameters = Parameters<EventTarget['addEventListener']>;
+type EventListenerOrEventListenerObject = EventListenerParameters[1];
+type EventListenerOptions = EventListenerParameters[2];
+
 /**
  * Interface defining the public JavaScript API for interacting with CloudCannon's Visual Editor.
  * This API provides methods for managing content, handling file operations, and controlling the editor's state.
@@ -294,8 +298,16 @@ export interface CloudCannonJavaScriptV1APIFileContent {
 	 */
 	set(options: any): Promise<void>;
 
-	addEventListener(event: 'change', callback: (event: any) => void): void;
-	removeEventListener(event: 'change', callback: (event: any) => void): void;
+	addEventListener(
+		event: 'change',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+	removeEventListener(
+		event: 'change',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
 }
 
 export interface CloudCannonJavaScriptV1APIFileData {
@@ -395,8 +407,16 @@ export interface CloudCannonJavaScriptV1APIFileData {
 	 */
 	moveArrayItem(options: MoveArrayItemOptions): Promise<void>;
 
-	addEventListener(event: 'change', callback: (event: any) => void): void;
-	removeEventListener(event: 'change', callback: (event: any) => void): void;
+	addEventListener(
+		event: 'change',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+	removeEventListener(
+		event: 'change',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
 }
 
 export interface CloudCannonJavaScriptV1APIFile {
@@ -474,8 +494,16 @@ export interface CloudCannonJavaScriptV1APIFile {
 	 */
 	releaseLock(): Promise<{ readOnly: boolean }>;
 
-	addEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
-	removeEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
+	addEventListener(
+		event: 'change' | 'delete' | 'create',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+	removeEventListener(
+		event: 'change' | 'delete' | 'create',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
 }
 
 export interface CloudCannonJavaScriptV1APICollection {
@@ -499,8 +527,16 @@ export interface CloudCannonJavaScriptV1APICollection {
 	//  */
 	// add(options: any): Promise<CloudCannonJavaScriptV1APIFile>;
 
-	addEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
-	removeEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
+	addEventListener(
+		event: 'change' | 'delete' | 'create',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+	removeEventListener(
+		event: 'change' | 'delete' | 'create',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
 }
 
 export interface CloudCannonJavaScriptV1API {
@@ -548,8 +584,16 @@ export interface CloudCannonJavaScriptV1API {
 	files(): Promise<CloudCannonJavaScriptV1APIFile[]>;
 	collections(): Promise<CloudCannonJavaScriptV1APICollection[]>;
 
-	addEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
-	removeEventListener(event: 'change' | 'delete' | 'create', callback: (event: any) => void): void;
+	addEventListener(
+		event: 'change' | 'delete' | 'create',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+	removeEventListener(
+		event: 'change' | 'delete' | 'create',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
 }
 
 export type CloudCannonJavaScriptAPIVersions = 'v0' | 'v1';
@@ -558,11 +602,10 @@ export interface CloudCannonApiEventDetails {
 	CloudCannonAPI?: CloudCannonJavascriptApiRouter;
 	CloudCannon?: CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
 }
+
 export interface CloudCannonEditorWindow extends Window, CloudCannonApiEventDetails {}
 
 export interface CloudCannonJavascriptApiRouter {
-	useVersion(
-		key: CloudCannonJavaScriptAPIVersions,
-		preventGlobalInstall?: boolean
-	): CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
+	useVersion(key: 'v0', preventGlobalInstall?: boolean): CloudCannonJavaScriptV0API;
+	useVersion(key: 'v1', preventGlobalInstall?: boolean): CloudCannonJavaScriptV1API;
 }
