@@ -1,8 +1,12 @@
 import type {
 	Cascade,
 	FileInput,
+	Input,
+	InputType,
 	RichTextInput,
 	SnippetConfig,
+	Structure,
+	StructureValue,
 	UrlInput,
 } from '@cloudcannon/configuration-types';
 
@@ -210,7 +214,7 @@ export interface EditOptions {
 	/** Optional style information */
 	style?: string | null;
 	/** The mouse event that triggered the edit */
-	e: MouseEvent;
+	e?: MouseEvent;
 }
 
 /**
@@ -235,7 +239,7 @@ export interface AddArrayItemOptions extends ArrayOptions {
 	/** The value to insert */
 	value: any;
 	/** The mouse event that triggered the addition */
-	e: MouseEvent;
+	e?: MouseEvent;
 }
 
 /**
@@ -254,6 +258,10 @@ export interface MoveArrayItemOptions extends ArrayOptions {
 export interface RemoveArrayItemOptions extends ArrayOptions {
 	/** The current index of the item */
 	index: number;
+}
+
+export interface GetInputConfigOptions {
+	slug: string;
 }
 
 /**
@@ -495,15 +503,17 @@ export interface CloudCannonJavaScriptV1APIFile {
 	releaseLock(): Promise<{ readOnly: boolean }>;
 
 	addEventListener(
-		event: 'change' | 'delete' | 'create',
+		event: 'change' | 'delete',
 		listener: EventListenerOrEventListenerObject | null,
 		options?: EventListenerOptions | boolean
 	): void;
 	removeEventListener(
-		event: 'change' | 'delete' | 'create',
+		event: 'change' | 'delete',
 		listener: EventListenerOrEventListenerObject | null,
 		options?: EventListenerOptions | boolean
 	): void;
+
+	getInputConfig(options: GetInputConfigOptions): Promise<Input | undefined>;
 }
 
 export interface CloudCannonJavaScriptV1APICollection {
@@ -528,15 +538,43 @@ export interface CloudCannonJavaScriptV1APICollection {
 	// add(options: any): Promise<CloudCannonJavaScriptV1APIFile>;
 
 	addEventListener(
-		event: 'change' | 'delete' | 'create',
+		event: 'change' | 'delete',
 		listener: EventListenerOrEventListenerObject | null,
 		options?: EventListenerOptions | boolean
 	): void;
 	removeEventListener(
-		event: 'change' | 'delete' | 'create',
+		event: 'change' | 'delete',
 		listener: EventListenerOrEventListenerObject | null,
 		options?: EventListenerOptions | boolean
 	): void;
+}
+
+export interface CloudCannonJavaScriptV1APIDataset {
+	/**
+	 * The key of the dataset
+	 */
+	datasetKey: string;
+
+	/**
+	 * Gets the items in a dataset
+	 * @returns Promise that resolves with the items in the collection
+	 */
+	items(): Promise<CloudCannonJavaScriptV1APIFile[] | CloudCannonJavaScriptV1APIFile>;
+
+	addEventListener(
+		event: 'change' | 'delete',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+	removeEventListener(
+		event: 'change' | 'delete',
+		listener: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean
+	): void;
+}
+
+export interface CloudCannonJavaScriptV1APITextEditableRegion {
+	setContent: (content?: string | null) => void;
 }
 
 export interface CloudCannonJavaScriptV1API {
@@ -573,7 +611,7 @@ export interface CloudCannonJavaScriptV1API {
 	 * @param inputConfig - Optional configuration for the input
 	 * @returns Promise that resolves with the path of the uploaded file
 	 */
-	upload(
+	uploadFile(
 		file: File,
 		inputConfig: RichTextInput | UrlInput | FileInput | undefined
 	): Promise<string | undefined>;
@@ -581,19 +619,36 @@ export interface CloudCannonJavaScriptV1API {
 	currentFile(): CloudCannonJavaScriptV1APIFile;
 	file(path: string): CloudCannonJavaScriptV1APIFile;
 	collection(key: string): CloudCannonJavaScriptV1APICollection;
+	dataset(key: string): CloudCannonJavaScriptV1APIDataset;
 	files(): Promise<CloudCannonJavaScriptV1APIFile[]>;
 	collections(): Promise<CloudCannonJavaScriptV1APICollection[]>;
 
 	addEventListener(
-		event: 'change' | 'delete' | 'create',
+		event: 'change' | 'delete',
 		listener: EventListenerOrEventListenerObject | null,
 		options?: EventListenerOptions | boolean
 	): void;
 	removeEventListener(
-		event: 'change' | 'delete' | 'create',
+		event: 'change' | 'delete',
 		listener: EventListenerOrEventListenerObject | null,
 		options?: EventListenerOptions | boolean
 	): void;
+
+	isAPIFile(obj: unknown): obj is CloudCannonJavaScriptV1APIFile;
+	isAPICollection(obj: unknown): obj is CloudCannonJavaScriptV1APICollection;
+	isAPIDataset(obj: unknown): obj is CloudCannonJavaScriptV1APIDataset;
+	findStructure(structure: Structure, value: any): StructureValue | undefined;
+	getInputType(key: string | undefined, value?: unknown, inputConfig?: Input): InputType;
+
+	createTextEditableRegion(
+		element: HTMLElement,
+		onChange: (content?: string | null) => void,
+		options?: {
+			elementType?: string;
+			editableType?: string;
+			inputConfig?: RichTextInput;
+		}
+	): Promise<CloudCannonJavaScriptV1APITextEditableRegion>;
 }
 
 export type CloudCannonJavaScriptAPIVersions = 'v0' | 'v1';
