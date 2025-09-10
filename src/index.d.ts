@@ -10,17 +10,13 @@ import type {
 	UrlInput,
 } from '@cloudcannon/configuration-types';
 
-export interface CloseCustomDataPanelOptions {
-	parentId: string;
-	id: string;
-}
-
-export interface OpenCustomDataPanelOptions extends CloseCustomDataPanelOptions {
-	data: Record<string, any> | any[] | undefined;
-	position?: DOMRect;
+export interface CreateCustomDataPanelOptions {
+	id?: string;
 	title: string;
-	inputConfig: Cascade & SnippetConfig;
-	allowFullDataCascade?: boolean;
+	onChange: (data?: Record<string, unknown> | unknown[]) => void;
+	data?: Record<string, unknown> | unknown[];
+	config?: Cascade;
+	position?: DOMRect;
 }
 
 type EventListenerParameters = Parameters<EventTarget['addEventListener']>;
@@ -88,20 +84,6 @@ export interface CloudCannonJavaScriptV0API {
 	 * @param e - The mouse event that triggered the edit
 	 */
 	edit(slug: string, style: string | null, e: MouseEvent): void;
-
-	/**
-	 * Opens a custom data panel for editing
-	 * @param options - Configuration options for the panel
-	 * @returns Promise that resolves when the panel is opened
-	 */
-	openCustomDataPanel(options: OpenCustomDataPanelOptions): Promise<void>;
-
-	/**
-	 * Closes a custom data panel
-	 * @param options - Configuration options for the panel to close
-	 * @returns Promise that resolves when the panel is closed
-	 */
-	closeCustomDataPanel(options: CloseCustomDataPanelOptions): Promise<void>;
 
 	/**
 	 * Uploads a file to the editor
@@ -592,20 +574,6 @@ export interface CloudCannonJavaScriptV1API {
 	setLoading(loadingData: string | undefined): Promise<any>;
 
 	/**
-	 * Opens a custom data panel for editing
-	 * @param options - Configuration options for the panel
-	 * @returns Promise that resolves when the panel is opened
-	 */
-	openCustomDataPanel(options: OpenCustomDataPanelOptions): Promise<void>;
-
-	/**
-	 * Closes a custom data panel
-	 * @param options - Configuration options for the panel to close
-	 * @returns Promise that resolves when the panel is closed
-	 */
-	closeCustomDataPanel(options: CloseCustomDataPanelOptions): Promise<void>;
-
-	/**
 	 * Uploads a file to the editor
 	 * @param file - The file to upload
 	 * @param inputConfig - Optional configuration for the input
@@ -649,6 +617,8 @@ export interface CloudCannonJavaScriptV1API {
 			inputConfig?: RichTextInput;
 		}
 	): Promise<CloudCannonJavaScriptV1APITextEditableRegion>;
+
+	createCustomDataPanel(options: CreateCustomDataPanelOptions): Promise<void>;
 }
 
 export type CloudCannonJavaScriptAPIVersions = 'v0' | 'v1';
