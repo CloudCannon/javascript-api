@@ -213,11 +213,6 @@ export interface ArrayOptions {
 export interface AddArrayItemOptions extends ArrayOptions {
 	/** The position to insert at (null for end) */
 	index: number | null;
-	/**
-	 * The position to insert at (before or after)
-	 * @default 'before'
-	 */
-	position?: 'before' | 'after';
 	/** The value to insert */
 	value: any;
 	/** The mouse event that triggered the addition */
