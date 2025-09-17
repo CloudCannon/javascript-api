@@ -148,7 +148,7 @@ export interface CloudCannonJavaScriptV0API {
 	 * @param options - Optional configuration for the value retrieval
 	 * @returns Promise that resolves with the current value
 	 */
-	value(options?: { keepMarkdownAsHTML?: boolean }): Promise<string>;
+	value(options?: { rewriteURLs?: boolean }): Promise<string>;
 
 	/**
 	 * Claims a lock on a file
@@ -241,17 +241,6 @@ export interface GetInputConfigOptions {
 	slug: string;
 }
 
-/**
- * Options for getting the current value in the v2 API
- */
-export interface ValueOptions {
-	/**
-	 * CloudCannon works with HTML by default. Markdown is converted to HTML and back again while editing.
-	 * If true, any markdown inputs will be returned as an HTML string instead of Markdown.
-	 */
-	keepMarkdownAsHTML?: boolean;
-}
-
 export interface FileNotFoundError extends Error {
 	message: 'File not found';
 }
@@ -268,12 +257,10 @@ export interface CloudCannonJavaScriptV1APIFileContent {
 	 * @throws {FileNotFoundError} If the file is not found
 	 * @example
 	 * ```javascript
-	 * const value = await CloudCannon.content({
-	 *   keepMarkdownAsHTML: true,
-	 * });
+	 * const value = await CloudCannon.content();
 	 * ```
 	 */
-	get(options?: ValueOptions): Promise<string>;
+	get(): Promise<string>;
 
 	/**
 	 * Sets the body content of a file
@@ -303,12 +290,10 @@ export interface CloudCannonJavaScriptV1APIFileData {
 	 * @returns Promise that resolves with the data of the file
 	 * @example
 	 * ```javascript
-	 * const value = await CloudCannon.data({
-	 *   keepMarkdownAsHTML: true,
-	 * });
+	 * const value = await CloudCannon.data();
 	 * ```
 	 */
-	get(options?: ValueOptions & { slug?: string }): Promise<Record<string, any> | any[] | undefined>;
+	get(options?: { slug?: string }): Promise<Record<string, any> | any[] | undefined>;
 
 	/**
 	 * Sets data for a specific field
@@ -614,6 +599,8 @@ export interface CloudCannonJavaScriptV1API {
 	): Promise<CloudCannonJavaScriptV1APITextEditableRegion>;
 
 	createCustomDataPanel(options: CreateCustomDataPanelOptions): Promise<void>;
+
+	getPreviewUrl(originalUrl: string, inputConfig?: Input): Promise<string>;
 }
 
 export type CloudCannonJavaScriptAPIVersions = 'v0' | 'v1';
