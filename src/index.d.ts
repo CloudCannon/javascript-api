@@ -293,7 +293,9 @@ export interface CloudCannonJavaScriptV1APIFileData {
 	 * const value = await CloudCannon.data();
 	 * ```
 	 */
-	get(options?: { slug?: string }): Promise<Record<string, any> | any[] | undefined>;
+	get(options?: { slug?: string; rewriteUrls?: boolean }): Promise<
+		Record<string, any> | any[] | undefined
+	>;
 
 	/**
 	 * Sets data for a specific field
