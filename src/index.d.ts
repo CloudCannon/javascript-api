@@ -195,8 +195,15 @@ export interface EditOptions {
 	slug: string;
 	/** Optional style information */
 	style?: string | null;
-	/** The mouse event that triggered the edit */
-	e?: MouseEvent;
+	/** The coordinates of the edit, and the bounding rectangle of the element being edited */
+	position?: {
+		x: number;
+		y: number;
+		left: number;
+		width: number;
+		top: number;
+		height: number;
+	};
 }
 
 /**
@@ -222,9 +229,13 @@ export interface AddArrayItemOptions extends ArrayOptions {
 /**
  * Options for moving an array item in the v2 API
  */
-export interface MoveArrayItemOptions extends ArrayOptions {
+export interface MoveArrayItemOptions {
+	/** the identifier of the array field to move from */
+	fromSlug: string;
+	/** the identifier of the array field to move to, defaults to fromSlug if not provided */
+	toSlug?: string;
 	/** The current index of the item */
-	index: number;
+	fromIndex: number;
 	/** The target index for the item */
 	toIndex: number;
 }
