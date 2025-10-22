@@ -222,8 +222,8 @@ export interface AddArrayItemOptions extends ArrayOptions {
 	index: number | null;
 	/** The value to insert */
 	value: any;
-	/** The mouse event that triggered the addition */
-	e?: MouseEvent;
+	/** The index to clone from if value isnt provided */
+	sourceIndex?: number;
 }
 
 /**
