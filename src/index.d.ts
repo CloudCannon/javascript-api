@@ -17,6 +17,7 @@ export interface CreateCustomDataPanelOptions {
 	data?: Record<string, unknown> | unknown[];
 	config?: Cascade;
 	position?: DOMRect;
+	allowFullDataCascade?: boolean;
 }
 
 type EventListenerParameters = Parameters<EventTarget['addEventListener']>;
