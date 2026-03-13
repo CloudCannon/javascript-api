@@ -4,7 +4,6 @@ import type {
 	Input,
 	InputType,
 	RichTextInput,
-	SnippetConfig,
 	Structure,
 	StructureValue,
 	UrlInput,
@@ -609,10 +608,12 @@ export interface CloudCannonJavaScriptV1API {
 			elementType?: string;
 			editableType?: string;
 			inputConfig?: RichTextInput;
+			extension?: string;
 		}
 	): Promise<CloudCannonJavaScriptV1APITextEditableRegion>;
 
-	createCustomDataPanel(options: CreateCustomDataPanelOptions): Promise<void>;
+	createCustomDataPanel(options: CreateCustomDataPanelOptions): Promise<string>;
+	destroyCustomDataPanel(id: string): Promise<void>;
 
 	getPreviewUrl(originalUrl: string, inputConfig?: Input): Promise<string>;
 }
