@@ -24,11 +24,11 @@ type EventListenerOrEventListenerObject = EventListenerParameters[1];
 type EventListenerOptions = EventListenerParameters[2];
 
 /**
- * Interface defining the public JavaScript API for interacting with CloudCannon's Visual Editor.
+ * Interface defining the public API for interacting with CloudCannon's Visual Editor.
  * This API provides methods for managing content, handling file operations, and controlling the editor's state.
- * @deprecated Use CloudCannonJavaScriptV1API instead
+ * @deprecated Use CloudCannonVisualEditorAPIV1 instead
  */
-export interface CloudCannonJavaScriptV0API {
+export interface CloudCannonVisualEditorAPIV0 {
 	/** Whether event handling is currently enabled */
 	eventsEnabled: boolean;
 	/** Whether the API should be installed globally */
@@ -260,7 +260,7 @@ export interface CollectionNotFoundError extends Error {
 	message: 'Collection not found';
 }
 
-export interface CloudCannonJavaScriptV1APIFileContent {
+export interface CloudCannonVisualEditorAPIV1FileContent {
 	/**
 	 * Gets the body content of a file. This is the content of the file without the front matter as a string.
 	 * @param options - Optional configuration for the value retrieval
@@ -293,7 +293,7 @@ export interface CloudCannonJavaScriptV1APIFileContent {
 	): void;
 }
 
-export interface CloudCannonJavaScriptV1APIFileData {
+export interface CloudCannonVisualEditorAPIV1FileData {
 	/**
 	 * Gets the data of a file. This will be a JSON object. This is either the data from the file or the data from front matter.
 	 * @param options - Optional configuration for the value retrieval
@@ -403,7 +403,7 @@ export interface CloudCannonJavaScriptV1APIFileData {
 	): void;
 }
 
-export interface CloudCannonJavaScriptV1APIFile {
+export interface CloudCannonVisualEditorAPIV1File {
 	/**
 	 * The path of the file
 	 */
@@ -412,12 +412,12 @@ export interface CloudCannonJavaScriptV1APIFile {
 	/**
 	 * The data of the file
 	 */
-	data: CloudCannonJavaScriptV1APIFileData;
+	data: CloudCannonVisualEditorAPIV1FileData;
 
 	/**
 	 * The content of the file
 	 */
-	content: CloudCannonJavaScriptV1APIFileContent;
+	content: CloudCannonVisualEditorAPIV1FileContent;
 
 	/**
 	 * Gets the body content of a file
@@ -454,7 +454,7 @@ export interface CloudCannonJavaScriptV1APIFile {
 	//  * @throws {FileNotFoundError} If the file is not found
 	//  * @returns Promise that resolves when the file is moved
 	//  */
-	// move(options: any): Promise<CloudCannonJavaScriptV1APIFile>;
+	// move(options: any): Promise<CloudCannonVisualEditorAPIV1File>;
 
 	// /**
 	//  * Copies a file
@@ -462,7 +462,7 @@ export interface CloudCannonJavaScriptV1APIFile {
 	//  * @throws {FileNotFoundError} If the file is not found
 	//  * @returns Promise that resolves when the file is copied
 	//  */
-	// duplicate(options: any): Promise<CloudCannonJavaScriptV1APIFile>;
+	// duplicate(options: any): Promise<CloudCannonVisualEditorAPIV1File>;
 
 	/**
 	 * Claims a lock on a file
@@ -492,7 +492,7 @@ export interface CloudCannonJavaScriptV1APIFile {
 	getInputConfig(options: GetInputConfigOptions): Promise<Input | undefined>;
 }
 
-export interface CloudCannonJavaScriptV1APICollection {
+export interface CloudCannonVisualEditorAPIV1Collection {
 	/**
 	 * The key of the collection
 	 */
@@ -503,7 +503,7 @@ export interface CloudCannonJavaScriptV1APICollection {
 	 * @throws {CollectionNotFoundError} If the collection is not found
 	 * @returns Promise that resolves with the items in the collection
 	 */
-	items(): Promise<CloudCannonJavaScriptV1APIFile[]>;
+	items(): Promise<CloudCannonVisualEditorAPIV1File[]>;
 
 	// /**
 	//  * Adds an item to a collection or triggers an add modal if the provided items are not available.
@@ -511,7 +511,7 @@ export interface CloudCannonJavaScriptV1APICollection {
 	//  * @throws {CollectionNotFoundError} If the collection is not found
 	//  * @returns Promise that resolves with the added item
 	//  */
-	// add(options: any): Promise<CloudCannonJavaScriptV1APIFile>;
+	// add(options: any): Promise<CloudCannonVisualEditorAPIV1File>;
 
 	addEventListener(
 		event: 'change' | 'delete',
@@ -525,7 +525,7 @@ export interface CloudCannonJavaScriptV1APICollection {
 	): void;
 }
 
-export interface CloudCannonJavaScriptV1APIDataset {
+export interface CloudCannonVisualEditorAPIV1Dataset {
 	/**
 	 * The key of the dataset
 	 */
@@ -535,7 +535,7 @@ export interface CloudCannonJavaScriptV1APIDataset {
 	 * Gets the items in a dataset
 	 * @returns Promise that resolves with the items in the collection
 	 */
-	items(): Promise<CloudCannonJavaScriptV1APIFile[] | CloudCannonJavaScriptV1APIFile>;
+	items(): Promise<CloudCannonVisualEditorAPIV1File[] | CloudCannonVisualEditorAPIV1File>;
 
 	addEventListener(
 		event: 'change' | 'delete',
@@ -549,11 +549,11 @@ export interface CloudCannonJavaScriptV1APIDataset {
 	): void;
 }
 
-export interface CloudCannonJavaScriptV1APITextEditableRegion {
+export interface CloudCannonVisualEditorAPIV1TextEditableRegion {
 	setContent: (content?: string | null) => void;
 }
 
-export interface CloudCannonJavaScriptV1API {
+export interface CloudCannonVisualEditorAPIV1 {
 	/**
 	 * Gets prefetched files
 	 * @returns Promise that resolves with a record of file blobs
@@ -578,12 +578,12 @@ export interface CloudCannonJavaScriptV1API {
 		inputConfig: RichTextInput | UrlInput | FileInput | undefined
 	): Promise<string | undefined>;
 
-	currentFile(): CloudCannonJavaScriptV1APIFile;
-	file(path: string): CloudCannonJavaScriptV1APIFile;
-	collection(key: string): CloudCannonJavaScriptV1APICollection;
-	dataset(key: string): CloudCannonJavaScriptV1APIDataset;
-	files(): Promise<CloudCannonJavaScriptV1APIFile[]>;
-	collections(): Promise<CloudCannonJavaScriptV1APICollection[]>;
+	currentFile(): CloudCannonVisualEditorAPIV1File;
+	file(path: string): CloudCannonVisualEditorAPIV1File;
+	collection(key: string): CloudCannonVisualEditorAPIV1Collection;
+	dataset(key: string): CloudCannonVisualEditorAPIV1Dataset;
+	files(): Promise<CloudCannonVisualEditorAPIV1File[]>;
+	collections(): Promise<CloudCannonVisualEditorAPIV1Collection[]>;
 
 	addEventListener(
 		event: 'change' | 'delete',
@@ -596,9 +596,9 @@ export interface CloudCannonJavaScriptV1API {
 		options?: EventListenerOptions | boolean
 	): void;
 
-	isAPIFile(obj: unknown): obj is CloudCannonJavaScriptV1APIFile;
-	isAPICollection(obj: unknown): obj is CloudCannonJavaScriptV1APICollection;
-	isAPIDataset(obj: unknown): obj is CloudCannonJavaScriptV1APIDataset;
+	isAPIFile(obj: unknown): obj is CloudCannonVisualEditorAPIV1File;
+	isAPICollection(obj: unknown): obj is CloudCannonVisualEditorAPIV1Collection;
+	isAPIDataset(obj: unknown): obj is CloudCannonVisualEditorAPIV1Dataset;
 	findStructure(structure: Structure, value: any): StructureValue | undefined;
 	getInputType(key: string | undefined, value?: unknown, inputConfig?: Input): InputType;
 
@@ -611,7 +611,7 @@ export interface CloudCannonJavaScriptV1API {
 			inputConfig?: RichTextInput;
 			extension?: string;
 		}
-	): Promise<CloudCannonJavaScriptV1APITextEditableRegion>;
+	): Promise<CloudCannonVisualEditorAPIV1TextEditableRegion>;
 
 	createCustomDataPanel(options: CreateCustomDataPanelOptions): Promise<string>;
 	destroyCustomDataPanel(id: string): Promise<void>;
@@ -619,16 +619,16 @@ export interface CloudCannonJavaScriptV1API {
 	getPreviewUrl(originalUrl: string, inputConfig?: Input): Promise<string>;
 }
 
-export type CloudCannonJavaScriptAPIVersions = 'v0' | 'v1';
+export type CloudCannonVisualEditorAPIVersions = 'v0' | 'v1';
 
-export interface CloudCannonApiEventDetails {
-	CloudCannonAPI?: CloudCannonJavascriptApiRouter;
-	CloudCannon?: CloudCannonJavaScriptV0API | CloudCannonJavaScriptV1API;
+export interface CloudCannonVisualEditorAPIEventDetails {
+	CloudCannonAPI?: CloudCannonVisualEditorAPIRouter;
+	CloudCannon?: CloudCannonVisualEditorAPIV0 | CloudCannonVisualEditorAPIV1;
 }
 
-export interface CloudCannonEditorWindow extends Window, CloudCannonApiEventDetails {}
+export interface CloudCannonEditorWindow extends Window, CloudCannonVisualEditorAPIEventDetails {}
 
-export interface CloudCannonJavascriptApiRouter {
-	useVersion(key: 'v0', preventGlobalInstall?: boolean): CloudCannonJavaScriptV0API;
-	useVersion(key: 'v1', preventGlobalInstall?: boolean): CloudCannonJavaScriptV1API;
+export interface CloudCannonVisualEditorAPIRouter {
+	useVersion(key: 'v0', preventGlobalInstall?: boolean): CloudCannonVisualEditorAPIV0;
+	useVersion(key: 'v1', preventGlobalInstall?: boolean): CloudCannonVisualEditorAPIV1;
 }

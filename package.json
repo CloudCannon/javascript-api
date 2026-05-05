@@ -1,21 +1,21 @@
 {
-	"name": "@cloudcannon/javascript-api",
+	"name": "@cloudcannon/visual-editor-api",
 	"version": "0.0.0",
 	"type": "module",
-	"description": "Contains TypeScript declarations for the CloudCannon JavaScript API.",
+	"description": "Contains TypeScript declarations for the CloudCannon Visual Editor API.",
 	"author": "CloudCannon <support@cloudcannon.com>",
 	"license": "MIT",
 	"keywords": [
 		"static site generator",
 		"cloudcannon"
 	],
-	"homepage": "https://github.com/CloudCannon/javascript-api#readme",
+	"homepage": "https://github.com/CloudCannon/visual-editor-api#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/CloudCannon/javascript-api.git"
+		"url": "git+https://github.com/CloudCannon/visual-editor-api.git"
 	},
 	"bugs": {
-		"url": "https://github.com/CloudCannon/javascript-api/issues",
+		"url": "https://github.com/CloudCannon/visual-editor-api/issues",
 		"email": "support@cloudcannon.com"
 	},
 	"scripts": {

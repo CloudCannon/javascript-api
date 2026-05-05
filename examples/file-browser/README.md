@@ -1,6 +1,6 @@
 # CloudCannon File Browser
 
-A modern file browser and code editor built with React and Monaco Editor that integrates with the CloudCannon JavaScript API v1.
+A modern file browser and code editor built with React and Monaco Editor that integrates with the CloudCannon Visual Editor API v1.
 
 ## Features
 
@@ -18,7 +18,7 @@ A modern file browser and code editor built with React and Monaco Editor that in
 This application is designed to run within the CloudCannon editor environment. Make sure you have:
 
 - Access to CloudCannon editor
-- The CloudCannon JavaScript API available on the window object
+- The CloudCannon Visual Editor API available on the window object
 
 ### Installation
 
@@ -59,7 +59,7 @@ The built files will be in the `dist` directory. Create a site on CloudCannon us
 
 ### API Integration
 
-The application uses the CloudCannon JavaScript API v1:
+The application uses the CloudCannon Visual Editor API v1:
 
 ```typescript
 // Access the API
@@ -171,4 +171,4 @@ If you encounter build issues:
 
 ## License
 
-This project is part of the CloudCannon JavaScript API examples and follows the same license terms.
+This project is part of the CloudCannon Visual Editor API examples and follows the same license terms.
