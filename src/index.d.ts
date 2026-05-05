@@ -626,7 +626,9 @@ export interface CloudCannonVisualEditorAPIEventDetails {
 	CloudCannon?: CloudCannonVisualEditorAPIV0 | CloudCannonVisualEditorAPIV1;
 }
 
-export interface CloudCannonEditorWindow extends Window, CloudCannonVisualEditorAPIEventDetails {}
+export interface CloudCannonVisualEditorWindow
+	extends Window,
+		CloudCannonVisualEditorAPIEventDetails {}
 
 export interface CloudCannonVisualEditorAPIRouter {
 	useVersion(key: 'v0', preventGlobalInstall?: boolean): CloudCannonVisualEditorAPIV0;

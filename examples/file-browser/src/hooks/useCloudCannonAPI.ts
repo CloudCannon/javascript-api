@@ -1,5 +1,5 @@
 import type {
-	CloudCannonEditorWindow,
+	CloudCannonVisualEditorWindow,
 	CloudCannonVisualEditorAPIEventDetails,
 	CloudCannonVisualEditorAPIRouter,
 	CloudCannonVisualEditorAPIV1,
@@ -50,7 +50,7 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 	};
 
 	useEffect(() => {
-		const win = window as CloudCannonEditorWindow;
+		const win = window as CloudCannonVisualEditorWindow;
 		if (win.CloudCannonAPI) {
 			console.log('CloudCannonAPI found in window');
 			setCloudCannonApi(win.CloudCannonAPI);
