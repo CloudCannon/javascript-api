@@ -1,30 +1,30 @@
 import type {
-	CloudCannonApiEventDetails,
-	CloudCannonEditorWindow,
-	CloudCannonJavaScriptV1API,
-	CloudCannonJavaScriptV1APICollection,
-	CloudCannonJavaScriptV1APIFile,
-	CloudCannonJavascriptApiRouter,
-} from '@cloudcannon/javascript-api';
+	CloudCannonVisualEditorWindow,
+	CloudCannonVisualEditorAPIEventDetails,
+	CloudCannonVisualEditorAPIRouter,
+	CloudCannonVisualEditorAPIV1,
+	CloudCannonVisualEditorAPIV1Collection,
+	CloudCannonVisualEditorAPIV1File,
+} from '@cloudcannon/visual-editor-api';
 import { useEffect, useState } from 'react';
 // import { installMockAPIIfNeeded } from '../utils/mockAPI';
 
 export interface UseCloudCannonAPIReturn {
-	api: CloudCannonJavaScriptV1API | null;
+	api: CloudCannonVisualEditorAPIV1 | null;
 	isLoading: boolean;
 	error: string | null;
-	files: CloudCannonJavaScriptV1APIFile[];
-	collections: CloudCannonJavaScriptV1APICollection[];
+	files: CloudCannonVisualEditorAPIV1File[];
+	collections: CloudCannonVisualEditorAPIV1Collection[];
 	refreshFiles: () => Promise<void>;
 }
 
 export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
-	const [api, setApi] = useState<CloudCannonJavaScriptV1API | null>(null);
+	const [api, setApi] = useState<CloudCannonVisualEditorAPIV1 | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const [files, setFiles] = useState<CloudCannonJavaScriptV1APIFile[]>([]);
-	const [collections, setCollections] = useState<CloudCannonJavaScriptV1APICollection[]>([]);
-	const [CloudCannonAPI, setCloudCannonApi] = useState<CloudCannonJavascriptApiRouter | undefined>(
+	const [files, setFiles] = useState<CloudCannonVisualEditorAPIV1File[]>([]);
+	const [collections, setCollections] = useState<CloudCannonVisualEditorAPIV1Collection[]>([]);
+	const [CloudCannonAPI, setCloudCannonApi] = useState<CloudCannonVisualEditorAPIRouter | undefined>(
 		undefined
 	);
 
@@ -50,7 +50,7 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 	};
 
 	useEffect(() => {
-		const win = window as CloudCannonEditorWindow;
+		const win = window as CloudCannonVisualEditorWindow;
 		if (win.CloudCannonAPI) {
 			console.log('CloudCannonAPI found in window');
 			setCloudCannonApi(win.CloudCannonAPI);
@@ -59,7 +59,7 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 
 		console.log('Added listener for cloudcannon:load');
 		document.addEventListener('cloudcannon:load', function (
-			e: CustomEvent<CloudCannonApiEventDetails>
+			e: CustomEvent<CloudCannonVisualEditorAPIEventDetails>
 		) {
 			console.log('CloudCannonAPI found in event');
 			setCloudCannonApi(e.detail.CloudCannonAPI);
@@ -79,7 +79,7 @@ export function useCloudCannonAPI(): UseCloudCannonAPIReturn {
 				}
 
 				// Use version 1 of the API
-				const v1API = CloudCannonAPI.useVersion('v1') as CloudCannonJavaScriptV1API;
+				const v1API = CloudCannonAPI.useVersion('v1') as CloudCannonVisualEditorAPIV1;
 
 				if (!v1API) {
 					throw new Error('Failed to initialize CloudCannon API v1');

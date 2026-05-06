@@ -24,7 +24,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"],
-			"@cloudcannon/javascript-api": ["../../src/index.d.ts"]
+			"@cloudcannon/visual-editor-api": ["../../src/index.d.ts"]
 		}
 	},
 	"include": ["src"],

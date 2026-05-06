@@ -15,7 +15,7 @@
     "@monaco-editor/react": "^4.6.0",
     "monaco-editor": "^0.45.0",
     "lucide-react": "^0.294.0",
-    "@cloudcannon/javascript-api": "file:../../"
+    "@cloudcannon/visual-editor-api": "file:../../"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

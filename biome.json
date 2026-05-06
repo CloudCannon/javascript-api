@@ -1,16 +1,9 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
 	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
 	"files": {
 		"ignoreUnknown": false,
-		"includes": [
-			"**",
-			"!**/.zed",
-			"!**/.backstage",
-			"!**/package.json",
-			"!**/package-lock.json",
-			"!examples"
-		]
+		"includes": ["**", "!**/.zed", "!**/package.json", "!**/package-lock.json", "!examples"]
 	},
 	"formatter": {
 		"enabled": true,
